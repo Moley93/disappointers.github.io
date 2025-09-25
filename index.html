@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disappointers - Darts Team Manager</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Disappointers</h1>
+            <nav>
+                <button class="nav-btn" onclick="showSection('dashboard')">Dashboard</button>
+                <button class="nav-btn" onclick="showSection('team-selector')">Team Selector</button>
+                <button class="nav-btn" onclick="showSection('match-entry')">Enter Match</button>
+                <button class="nav-btn" onclick="showSection('statistics')">Statistics</button>
+                <button class="nav-btn" onclick="showSection('players')">Players</button>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section active">
+                <h2>Team Dashboard</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Total Matches</h3>
+                        <span class="stat-value" id="total-matches">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Matches Won</h3>
+                        <span class="stat-value" id="matches-won">0</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Win Percentage</h3>
+                        <span class="stat-value" id="match-win-percentage">0%</span>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total 180s</h3>
+                        <span class="stat-value" id="total-180s">0</span>
+                    </div>
+                </div>
+
+                <div class="recent-matches">
+                    <h3>Recent Matches</h3>
+                    <div id="recent-matches-list"></div>
+                </div>
+            </section>
+
+
+            <!-- Match Entry Section -->
+            <section id="match-entry" class="section">
+                <h2>Enter Match Results</h2>
+
+                <div class="match-form">
+                    <div class="match-header">
+                        <input type="date" id="match-date" required>
+                        <input type="text" id="opponent-team" placeholder="Opponent Team" required>
+                    </div>
+
+                    <!-- Doubles Games -->
+                    <div class="doubles-section">
+                        <h3>Doubles Games (Best of 3)</h3>
+                        <div id="doubles-games"></div>
+                    </div>
+
+                    <!-- Singles Games -->
+                    <div class="singles-section">
+                        <h3>Singles Games (Best of 3)</h3>
+                        <div id="singles-games"></div>
+                    </div>
+
+                    <button type="button" onclick="saveMatch()" class="save-btn">Save Match</button>
+                </div>
+            </section>
+
+            <!-- Statistics Section -->
+            <section id="statistics" class="section">
+                <h2>Singles Statistics</h2>
+                <div id="singles-statistics-table"></div>
+
+                <h2>Doubles Statistics</h2>
+                <div id="doubles-statistics-table"></div>
+            </section>
+
+            <!-- Team Selector Section -->
+            <section id="team-selector" class="section">
+                <h2>Team Selector</h2>
+
+                <div class="match-setup">
+                    <div class="match-type-selector">
+                        <label for="venue-type">Match Venue:</label>
+                        <select id="venue-type" onchange="updateVenueType()">
+                            <option value="away">Away Match</option>
+                            <option value="home">Home Match</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="player-availability">
+                    <h3>Available Players Tonight (Select 6-10 players)</h3>
+                    <div id="available-players-list" class="players-grid"></div>
+                    <div class="selection-info">
+                        <span id="selected-count">0</span> players selected
+                    </div>
+                </div>
+
+                <div class="lineup-generation">
+                    <button onclick="generateCrawleyLineup()" class="generate-btn">Generate Optimal Lineup</button>
+                </div>
+
+                <div class="lineup-display" id="lineup-display" style="display: none;">
+                    <h3>Match Lineup</h3>
+                    <div class="venue-info" id="venue-info"></div>
+
+                    <div class="games-section">
+                        <div class="doubles-section">
+                            <h4>Doubles Games</h4>
+                            <div id="doubles-assignments"></div>
+                        </div>
+
+                        <div class="singles-section">
+                            <h4>Singles Games</h4>
+                            <div id="singles-assignments"></div>
+                        </div>
+                    </div>
+
+                    <div class="flexible-slot" id="flexible-slot" style="display: none;">
+                        <h4>Flexible Assignment</h4>
+                        <div id="flexible-assignment"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Players Section -->
+            <section id="players" class="section">
+                <h2>Team Players</h2>
+                <div id="players-list"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
